@@ -1,11 +1,32 @@
-export class CartPage{
+import { Page } from '@playwright/test';
 
-    //Name of locators
-    
+export class CartPage {
 
-    //Constructor
+    readonly page: Page;
+    goToShoppingCartLink;
+    termsCheckbox;
+    checkoutButton;
+
+    constructor(page) {
+
+        this.goToShoppingCartLink = this.page.locator("//span[normalize-space()='Shopping cart']");
+        this.termsCheckbox = this.page.locator('#termsofservice');
+        this.checkoutButton = this.page.locator('#checkout');
+
+    }
 
 
-    //Method
+    async gotoShoppingCart() {
 
+        await this.page.locator(this.goToShoppingCartLink).click();
+
+    }
+
+    async proceedToCheckout() {
+
+        await this.page.locator(this.termsCheckbox).click();
+        await this.page.locator(this.checkoutButton).click();
+
+    }
 }
+
