@@ -1,13 +1,14 @@
 import { Page } from '@playwright/test';
 
+
 export class CartPage {
 
-    readonly page: Page;
+    //readonly page: Page;
     goToShoppingCartLink;
     termsCheckbox;
     checkoutButton;
 
-    constructor(page) {
+    constructor(readonly page: Page) {
 
         this.goToShoppingCartLink = this.page.locator("//span[normalize-space()='Shopping cart']");
         this.termsCheckbox = this.page.locator('#termsofservice');
@@ -18,14 +19,15 @@ export class CartPage {
 
     async gotoShoppingCart() {
 
-        await this.page.locator(this.goToShoppingCartLink).click();
+        //await this.page.locator(this.goToShoppingCartLink).click();
+        await this.goToShoppingCartLink.click();
 
     }
 
     async proceedToCheckout() {
 
-        await this.page.locator(this.termsCheckbox).click();
-        await this.page.locator(this.checkoutButton).click();
+        await this.termsCheckbox.click();
+        await this.checkoutButton.click();
 
     }
 }

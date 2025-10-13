@@ -2,11 +2,10 @@ import { Page } from '@playwright/test';
 
 export class ProductPage {
 
-    readonly page: Page;
     addToCartButton;
     //productLink;
 
-    constructor(page) {
+    constructor(readonly page: Page) {
 
         this.addToCartButton = this.page.locator('input[value="Add to cart"]');
        // this.productLink = (productName: string) => this.page.locator('.product-title a:text-is("${productName}")');
@@ -21,8 +20,7 @@ export class ProductPage {
     // }
 
     async addToCart() {
-
-        await this.page.locator(this.addToCartButton).click();
+        await this.addToCartButton.click();
 
     }
 }

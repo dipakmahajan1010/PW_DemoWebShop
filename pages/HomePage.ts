@@ -2,11 +2,10 @@ import { Page } from '@playwright/test';
 
 export class HomePage {
 
-    readonly page: Page;
     searchInput;
     readonly searchButton;
 
-    constructor(page) {
+    constructor(readonly page: Page) {
 
         this.searchInput = this.page.locator('input[id="small-searchterms"]');
         this.searchButton = this.page.locator('input[value="Search"]');
@@ -14,8 +13,8 @@ export class HomePage {
 
     async searchProduct(productName: string) {
 
-        await this.page.locator(this.searchInput).fill(productName);
-        await this.page.locator(this.searchButton).click();
+        await this.searchInput.fill(productName);
+        await this.searchButton.click();
 
     }
 }
