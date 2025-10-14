@@ -1,6 +1,6 @@
-import { Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 
-export default class LoginPage {
+export class LoginPage {
 
     readonly loginLink;
     readonly email;
@@ -16,11 +16,6 @@ export default class LoginPage {
         this.loginButton = this.page.locator('input[value="Log in"]');
     }
 
-    // //Method
-    // async loginPage(){
-    //     await this.page.goto("https://demowebshop.tricentis.com/");
-
-    // }
     async login(emailId: string, pword: string) {
 
         await this.loginLink.click();
@@ -30,4 +25,9 @@ export default class LoginPage {
 
     }
 
+    async assertLoginSuccess() {
+        await expect(this.page.locator('a[href="/logout"]')).toBeVisible();
+        //await expect(this.page.locator('.account')).toBeVisible();
+
+}
 }
