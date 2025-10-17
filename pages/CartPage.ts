@@ -1,10 +1,10 @@
 import { expect, Page } from '@playwright/test';
-//import { Helper } from 'utils/helper';
+import { Helper } from 'utils/helper';
 
 
 export class CartPage {
 
-    //helper;
+    helper;
     goToShoppingCartLink;
     termsCheckbox;
     checkoutButton;
@@ -12,7 +12,7 @@ export class CartPage {
 
     constructor(readonly page: Page) {
 
-        //this.helper = new Helper(this.page);
+        this.helper = new Helper(this.page);
         this.goToShoppingCartLink = this.page.locator("//span[normalize-space()='Shopping cart']");
         this.termsCheckbox = this.page.locator('#termsofservice');
         this.checkoutButton = this.page.locator('#checkout');
@@ -24,7 +24,7 @@ export class CartPage {
     async verifyCart(purchaseProductName: String) {
 
         await this.goToShoppingCartLink.click();
-        //await this.helper.staticWait(2000);
+        await this.helper.staticWait(2000);
         try {
 
             //verify or get purchase product value from addtocart
@@ -32,7 +32,7 @@ export class CartPage {
             await expect(productValue).toBe(purchaseProductName);
 
         } catch (error) {
-          //  await this.helper.screenShoton("productNamenotFound");
+           await this.helper.screenShoton("productNamenotFound");
             console.log("Product not found");
 
         }
