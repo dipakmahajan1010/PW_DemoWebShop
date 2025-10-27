@@ -18,17 +18,22 @@ export class CheckoutPage {
 
     // Initialize locators
     this.billingDropdown = page.locator('select#billing-address-select');
-    this.billingContinueButton = page.locator('input.button-1.new-address-next-step-button');
-    this.shippingAddressContinueButton = page.locator('input.button-1.shipping-address-next-step-button');
-    this.shippingMethodContinueButton = page.locator('input.button-1.shipping-method-next-step-button');
-    this.paymentMethodContinueButton = page.locator('input.button-1.payment-method-next-step-button');
-    this.paymentInfoContinueButton = page.locator('input.button-1.payment-info-next-step-button');
-    this.confirmOrderButton = page.locator('input.button-1.confirm-order-next-step-button');
+    this.billingContinueButton = page.locator("//input[@onclick='Billing.save()']");
+    this.shippingAddressContinueButton = page.locator("//input[@onclick='Shipping.save()']");
+    this.shippingMethodContinueButton = page.locator("//input[@class='button-1 shipping-method-next-step-button']");
+    this.paymentMethodContinueButton = page.locator("//input[@class='button-1 payment-method-next-step-button']");
+    this.paymentInfoContinueButton = page.locator("//input[@class='button-1 payment-info-next-step-button']");
+    this.confirmOrderButton = page.locator("//input[@value='Confirm']");
     this.successMessage = page.locator('div.title');
   }
 
-  async selectBillingAddress(addressLabel: string) {
-    await this.billingDropdown.selectOption({ label: addressLabel });
+  // async selectBillingAddress(addressLabel: string) {
+  //   await this.billingDropdown.selectOption({ label: addressLabel });
+  //   await this.billingContinueButton.click();
+  // }
+
+  async selectBillingAddress() {
+    //await this.billingDropdown.selectOption({ label: addressLabel });
     await this.billingContinueButton.click();
   }
 
