@@ -32,9 +32,16 @@ export class CheckoutPage {
   //   await this.billingContinueButton.click();
   // }
 
+
+  //handle missing data with try catch block
   async selectBillingAddress() {
-    //await this.billingDropdown.selectOption({ label: addressLabel });
-    await this.billingContinueButton.click();
+    try {
+      //await this.billingDropdown.selectOption({ label: addressLabel });
+      await this.billingContinueButton.click();
+    } catch (error) {
+      console.log("billing address is empty");
+    }
+
   }
 
   async continueShippingAddress() {

@@ -6,6 +6,7 @@ export class LoginPage {
     readonly email;
     readonly password;
     readonly loginButton;
+    readonly errorMessage;
 
     //Constructor
     constructor(readonly page: Page) {
@@ -14,14 +15,22 @@ export class LoginPage {
         this.email = this.page.locator('#Email');
         this.password = this.page.locator('#Password');
         this.loginButton = this.page.locator('input[value="Log in"]');
+        this.errorMessage = '.validation-summary-errors';
     }
 
     async login(emailId: string, pword: string) {
 
-        await this.loginLink.click();
-        await this.email.fill(emailId);
-        await this.password.fill(pword);
-        await this.loginButton.click();
+        try {
+            await this.loginLink.click();
+            await this.email.fill(emailId);
+            await this.password.fill(pword);
+            await this.loginButton.click();
+        }
+        catch (error) {
+            console.log("Login was unsuccessfull");
+            await expect(this.page.locator(this.errorMessage)).toContainText('Login was unsuccessful');
+
+        }
 
     }
 
@@ -29,5 +38,6 @@ export class LoginPage {
         await expect(this.page.locator('a[href="/logout"]')).toBeVisible();
         //await expect(this.page.locator('.account')).toBeVisible();
 
-}
+    }
+
 }
